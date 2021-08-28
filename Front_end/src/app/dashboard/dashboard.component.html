@@ -1,0 +1,741 @@
+<div class="main-content">
+    <div class="row justify-content-center ">
+        <ul class="nav nav-pills mb-3 top-nav" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="dashboard-tab" data-toggle="pill" href="#dashboard" role="tab"
+                    aria-controls="dashboard" aria-selected="true">{{ 'dashboard' | translate }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="website-task-tab" data-toggle="pill" href="#website-task" role="tab"
+                    aria-controls="website-task" aria-selected="false">{{ 'websiteTask' | translate }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="key-word-tab" data-toggle="pill" href="#key-word" role="tab"
+                    aria-controls="key-word" aria-selected="false">{{ 'keywords' | translate }}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-2">
+            <a mat-raised-button href="/repporting/{{id}}" class="btn btn-success btn-block">
+                  {{ 'showRapport' | translate }}
+            </a>
+        </div>
+    </div>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="dashboard" role="tabpanel">
+            <div class="container-fluid" *ngIf='allUserInfoModule.infoUser != null'>
+                <div class="row d-flex flex-row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 d-flex align-items-stretch">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-primary card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">vpn_key</i>
+                                </div>
+                                <p class="card-category">{{ 'keywords' | translate }}</p>
+                                <h3 class="card-title">{{TopKeyWord}} / {{allKeyWords.length}}
+                                    <!-- <small>keyword</small> -->
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="stats">
+                                    <!-- <i class="material-icons text-danger">warning</i>
+                                    <a href="javascript:void(0)">Get More Space...</a> -->
+                                    <p class="card-category">
+                                        {{ 'topKeyword/Total' | translate }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 d-flex align-items-stretch">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-primary card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">domain</i>
+                                </div>
+                                <p class="card-category">{{ 'domainAuthority' | translate }}</p>
+                                <h3 class="card-title">{{allUserInfoModule.infoUser[0].Domain_Authority}}</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="stats" *ngIf="allUserInfoModule.infoUser.length > 1">
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Domain_Authority - allUserInfoModule.infoUser[1].Domain_Authority) > 0'>
+                                        <span class="text-success">
+                                            <i class="fa fa-long-arrow-up"></i>
+                                            {{allUserInfoModule.infoUser[0].Domain_Authority - allUserInfoModule.infoUser[1].Domain_Authority}}
+                                        </span>
+                                        {{ 'increasedInLastUpdate' | translate }}
+                                    </p>
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Domain_Authority - allUserInfoModule.infoUser[1].Domain_Authority) == 0'>
+                                        {{ 'noChange' | translate }}
+                                    </p>
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Domain_Authority - allUserInfoModule.infoUser[1].Domain_Authority) < 0'>
+                                        <span class="text-danger">
+                                            <i class="fa fa-long-arrow-down"></i>
+                                            {{allUserInfoModule.infoUser[0].Domain_Authority - allUserInfoModule.infoUser[1].Domain_Authority}}
+                                        </span>
+                                        {{ 'decreasedInLastUpdate' | translate }}
+                                    </p>
+                                </div>
+                                <div class="stats" *ngIf=" allUserInfoModule.infoUser.length == 1">
+                                    <p class="card-category" *ngIf='allUserInfoModule.infoUser[0]'>
+                                        {{ 'domainAuthority' | translate }} {{ allUserInfoModule.infoUser[0].Domain_Authority }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 d-flex align-items-stretch">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-primary card-header-icon">
+                                <div class="card-icon">
+                                    <i class="fa fa-tachometer"></i>
+                                    <!-- <i class="material-icons">cloud_download</i> -->
+                                </div>
+                                <p class="card-category">{{ 'pageLoadSpeed' | translate }}</p>
+                                <h3 class="card-title">{{allUserInfoModule.infoUser[0].Page_Load_Speed}} s</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="stats" *ngIf="allUserInfoModule.infoUser.length > 1">
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Page_Load_Speed - allUserInfoModule.infoUser[1].Page_Load_Speed) < 0'>
+                                        <span class="text-success">
+                                            <i class="fa fa-long-arrow-up"></i>
+                                            {{sFormatter(allUserInfoModule.infoUser[0].Page_Load_Speed - allUserInfoModule.infoUser[1].Page_Load_Speed)}}
+                                        </span>
+                                        {{ 'increasedInLastUpdate' | translate }}
+                                    </p>
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Page_Load_Speed - allUserInfoModule.infoUser[1].Page_Load_Speed) == 0'>
+                                        {{ 'noChange' | translate }}
+                                    </p>
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Page_Load_Speed - allUserInfoModule.infoUser[1].Page_Load_Speed) > 0'>
+                                        <span class="text-danger">
+                                            <i class="fa fa-long-arrow-down"></i>
+                                            {{sFormatter(allUserInfoModule.infoUser[0].Page_Load_Speed - allUserInfoModule.infoUser[1].Page_Load_Speed)}}
+                                        </span>
+                                        {{ 'decreasedInLastUpdate' | translate }}
+                                    </p>
+                                </div>
+                                <div class="stats" *ngIf=" allUserInfoModule.infoUser.length == 1">
+                                    <p class="card-category" *ngIf='allUserInfoModule.infoUser[0]'>
+                                        {{ 'pageLoadSpeed' | translate }} {{ allUserInfoModule.infoUser[0].Page_Load_Speed }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 d-flex align-items-stretch">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-primary card-header-icon">
+                                <div class="card-icon">
+                                    <i class="fa fa-link"></i>
+                                </div>
+                                <p class="card-category">{{ 'numberOfBacklinks' | translate }}</p>
+                                <h3 class="card-title">{{kFormatter(allUserInfoModule.infoUser[0].Number_Backlinks)}}
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="stats" *ngIf="allUserInfoModule.infoUser.length > 1">
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Number_Backlinks - allUserInfoModule.infoUser[1].Number_Backlinks) > 0'>
+                                        <span class="text-success">
+                                            <i class="fa fa-long-arrow-up"></i>
+                                            {{kFormatter(allUserInfoModule.infoUser[0].Number_Backlinks - allUserInfoModule.infoUser[1].Number_Backlinks)}}
+                                        </span>
+                                        {{ 'increasedInLastUpdate' | translate }}
+                                    </p>
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Number_Backlinks - allUserInfoModule.infoUser[1].Number_Backlinks) == 0'>
+                                        {{ 'noChange' | translate }}
+                                    </p>
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Number_Backlinks - allUserInfoModule.infoUser[1].Number_Backlinks) < 0'>
+                                        <span class="text-danger">
+                                            <i class="fa fa-long-arrow-down"></i>
+                                            {{kFormatter(allUserInfoModule.infoUser[0].Number_Backlinks - allUserInfoModule.infoUser[1].Number_Backlinks)}}
+                                        </span>
+                                        {{ 'decreasedInLastUpdate' | translate }}
+                                    </p>
+                                </div>
+                                <div class="stats" *ngIf=" allUserInfoModule.infoUser.length == 1">
+                                    <p class="card-category" *ngIf='allUserInfoModule.infoUser[0]'>
+                                        {{ 'numberOfBacklinks' | translate }} {{ allUserInfoModule.infoUser[0].Number_Backlinks }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 d-flex align-items-stretch">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-primary card-header-icon">
+                                <div class="card-icon">
+                                    <i class="fa fa-file"></i>
+                                </div>
+                                <p class="card-category">{{ 'pagesIndexed' | translate }}</p>
+                                <h3 class="card-title">{{kFormatter(allUserInfoModule.infoUser[0].Number_Page)}}</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="stats" *ngIf="allUserInfoModule.infoUser.length > 1">
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Number_Page - allUserInfoModule.infoUser[1].Number_Page) > 0'>
+                                        <span class="text-success">
+                                            <i class="fa fa-long-arrow-up"></i>
+                                            {{kFormatter(allUserInfoModule.infoUser[0].Number_Page - allUserInfoModule.infoUser[1].Number_Page)}}
+                                        </span>
+                                        {{ 'increasedInLastUpdate' | translate }}
+                                    </p>
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Number_Page - allUserInfoModule.infoUser[1].Number_Page) == 0'>
+                                        {{ 'noChange' | translate }}
+                                    </p>
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Number_Page - allUserInfoModule.infoUser[1].Number_Page) < 0'>
+                                        <span class="text-danger">
+                                            <i class="fa fa-long-arrow-down"></i>
+                                            {{kFormatter(allUserInfoModule.infoUser[0].Number_Page - allUserInfoModule.infoUser[1].Number_Page)}}
+                                        </span>
+                                        {{ 'decreasedInLastUpdate' | translate }}
+                                    </p>
+                                </div>
+                                <div class="stats" *ngIf=" allUserInfoModule.infoUser.length == 1">
+                                    <p class="card-category" *ngIf='allUserInfoModule.infoUser[0]'>
+                                        Number of Pages Indexed {{ kFormatter(allUserInfoModule.infoUser[0].Number_Page) }}
+                                    </p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 d-flex align-items-stretch">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-primary card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">code</i>
+                                </div>
+                                <p class="card-category">{{ 'avgHtags' | translate }}s</p>
+                                <h3 class="card-title">{{kFormatter(allUserInfoModule.infoUser[0].Avg_HTag)}}</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="stats" *ngIf="allUserInfoModule.infoUser.length > 1">
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Avg_HTag - allUserInfoModule.infoUser[1].Avg_HTag) > 0'>
+                                        <span class="text-success">
+                                            <i class="fa fa-long-arrow-up"></i>
+                                            {{kFormatter(allUserInfoModule.infoUser[0].Avg_HTag - allUserInfoModule.infoUser[1].Avg_HTag)}}
+                                        </span>
+                                        {{ 'increasedInLastUpdate' | translate }}
+                                    </p>
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Avg_HTag - allUserInfoModule.infoUser[1].Avg_HTag) == 0'>
+                                        {{ 'noChange' | translate }}
+                                    </p>
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Avg_HTag - allUserInfoModule.infoUser[1].Avg_HTag) < 0'>
+                                        <span class="text-danger">
+                                            <i class="fa fa-long-arrow-down"></i>
+                                            {{kFormatter(allUserInfoModule.infoUser[0].Avg_HTag - allUserInfoModule.infoUser[1].Avg_HTag)}}
+                                        </span>
+                                        {{ 'decreasedInLastUpdate' | translate }}
+                                    </p>
+                                </div>
+                                <div class="stats" *ngIf=" allUserInfoModule.infoUser.length == 1">
+                                    <p class="card-category" *ngIf='allUserInfoModule.infoUser[0]'>
+                                        Number of Pages Indexed {{ kFormatter(allUserInfoModule.infoUser[0].Avg_HTag) }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 d-flex align-items-stretch">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-primary card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">info_outline</i>
+                                </div>
+                                <p class="card-category">{{ 'fixedIssues' | translate }}</p>
+                                <h3 class="card-title">{{ getTaskRealise() }}</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="stats">
+                                    <p class="card-category">
+                                        {{ 'numberFI/Total' | translate }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 d-flex align-items-stretch">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-primary card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">equalizer</i>
+                                </div>
+                                <p class="card-category">{{ 'publishingRate' | translate }}</p>
+                                <h3 class="card-title">{{kFormatter(allUserInfoModule.infoUser[0].Publishing_Rate) }}
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="stats" *ngIf="allUserInfoModule.infoUser.length > 1">
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Publishing_Rate - allUserInfoModule.infoUser[1].Publishing_Rate) > 0'>
+                                        <span class="text-success">
+                                            <i class="fa fa-long-arrow-up"></i>
+                                            {{kFormatter(allUserInfoModule.infoUser[0].Publishing_Rate - allUserInfoModule.infoUser[1].Publishing_Rate)}}
+                                        </span>
+                                        {{ 'increasedInLastUpdate' | translate }}
+                                    </p>
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Publishing_Rate - allUserInfoModule.infoUser[1].Publishing_Rate) == 0'>
+                                        {{ 'noChange' | translate }}
+                                    </p>
+                                    <p class="card-category"
+                                        *ngIf='(allUserInfoModule.infoUser[0].Publishing_Rate - allUserInfoModule.infoUser[1].Publishing_Rate) < 0'>
+                                        <span class="text-danger">
+                                            <i class="fa fa-long-arrow-down"></i>
+                                            {{kFormatter(allUserInfoModule.infoUser[0].Publishing_Rate - allUserInfoModule.infoUser[1].Publishing_Rate)}}
+                                        </span>
+                                        {{ 'decreasedInLastUpdate' | translate }}
+                                    </p>
+                                </div>
+                                <div class="stats" *ngIf=" allUserInfoModule.infoUser.length == 1">
+                                    <p class="card-category" *ngIf='allUserInfoModule.infoUser[0]'>
+                                        {{ 'publishingRatePerMonth' | translate }} {{ kFormatter(allUserInfoModule.infoUser[0].Publishing_Rate) }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-chart">
+                        <div class="card-header card-header-success">
+                            <div class="ct-chart" id="statusWebSite" style="height:255px"></div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">{{ 'websiteProgress' | translate }}</h4>
+                            <!-- <p class="card-category">
+                                <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in
+                                last
+                                update.</p> -->
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats" *ngIf="allUserInfoModule.infoUser">
+                                <i class="material-icons">access_time</i> {{formatDateTime(allUserInfoModule.infoUser[0].Date_Update)}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="website-task" role="tabpanel">
+            <div class="container-fluid">
+                <div class="row justify-content-end">
+                    <div class="col-md-4">
+                        <button mat-raised-button class="btn btn-success btn-block" data-toggle="modal"
+                            data-target="#newTaskModal">{{ 'addTask' | translate }}</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-tabs card-header-primary">
+                                <div class="nav-tabs-navigation">
+                                    <div class="nav-tabs-wrapper">
+                                        <span class="nav-tabs-title">{{ 'websiteProgress' | translate }}</span>
+                                        <ul class="nav nav-tabs" data-tabs="tabs">
+                                            <li class="nav-item" *ngFor='let t of typeTask'>
+                                                <a mat-button class="nav-link" href='#{{removeSpace(t)}}' data-toggle="tab">
+                                                    {{t}}
+                                                    <div class="ripple-container"></div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane" *ngFor='let t of typeTask' id='{{removeSpace(t)}}'>
+                                        <table class="table">
+                                            <thead class=" text-primary">
+                                                <th>
+                                                    &nbsp;
+                                                </th>
+                                                <th>
+                                                    {{ 'description' | translate }}
+                                                </th>
+                                                <th>
+                                                    {{ 'startDate' | translate }}
+                                                </th>
+                                                <th>
+                                                    {{ 'deadlineDate' | translate }}
+                                                </th>
+                                                <th style="text-align: end; 
+                                                vertical-align: middle;">
+                                                    {{ 'action' | translate }}
+                                                </th>
+                                            </thead>
+                                            <tbody style="padding: 20px 20px">
+                                                <tr *ngFor="let task of allTasks" style="padding: 20px 0px">
+                                                    <td style="width: 50px;" *ngIf="task.Type_Task == t">
+                                                        <div class="form-check">
+                                                            <label class="form-check-label" *ngIf='task.Checked'>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    (click)="updateTask(task)" value="" checked>
+                                                                <span class="form-check-sign">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                            </label>
+                                                            <label class="form-check-label" *ngIf='!task.Checked'>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    (click)="updateTask(task)" value="">
+                                                                <span class="form-check-sign">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td style=" text-align: start; 
+                                                    vertical-align: middle;" *ngIf="task.Type_Task == t">
+                                                        {{ task.Name_Task }} </td>
+                                                    <td style=" text-align: start; 
+                                                    vertical-align: middle;" *ngIf="task.Type_Task == t">
+                                                        {{ formatDate(task.Start) }} </td>
+                                                    <td style=" text-align: start; 
+                                                    vertical-align: middle;" *ngIf="task.Type_Task == t">
+                                                        {{ formatDate(task.End) }} </td>
+                                                    <td style=" text-align: end; 
+                                                    vertical-align: middle;" *ngIf="task.Type_Task == t">
+                                                        <button mat-raised-button type="button" matTooltip="{{ 'remove' | translate }}"
+                                                            [matTooltipPosition]="'above'"
+                                                            (click)='deleteTask(task.id_task)'
+                                                            class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                            <i class="material-icons">close</i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="key-word" role="tabpanel">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <div class="row ">
+                                    <div class="col-lg-8 col-md-12">
+                                        <h4 class="card-title">{{ 'keywordStats' | translate }}</h4>
+                                        <p>{{ 'keywordToIncrease' | translate }}</p>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <div class="input-group no-border">
+                                            <input type="text" [(ngModel)]="term" class="form-control card-title"
+                                                placeholder="Search....">
+                                            <!-- <button mat-raised-button type="submit"
+                                                class="btn btn-white btn-round btn-just-icon">
+                                                <i class="material-icons">search</i>
+                                                <div class="ripple-container"></div>
+                                            </button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="text-primary">
+                                        <th>ID</th>
+                                        <th>{{ 'keywords' | translate }}</th>
+                                        <th class="td-center">{{ 'dateUpdate' | translate }}</th>
+                                        <th class="td-center">{{ 'searchNumber' | translate }}</th>
+                                        <th class="td-center">{{ 'googlePos' | translate }}
+                                            <i *ngIf="order" (click)="setOrder(order)" class="fa fa-angle-up text-success"></i>
+                                            <i *ngIf="!order" (click)="setOrder(order)" class="fa fa-angle-down text-danger"></i>
+                                         </th>
+                                        <th class="td-center">{{ 'impression' | translate }}</th>
+                                        <th class="td-center">{{ 'clicks' | translate }}</th>
+                                        <th>{{ 'action' | translate }} </th>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            *ngFor="let keyword of allKeyWords | filter:term | paginate: { itemsPerPage: 10, currentPage: p } ">
+                                            <td>{{keyword.Id_Keyword}}</td>
+                                            <td>{{keyword.Name_keyword}}</td>
+                                            <td class="td-center">{{formatDate(keyword.Date_Update)}}</td>
+                                            <td class="td-center">
+                                                {{keyword.Number_Search[0]}}
+                                                <span *ngIf="keyword.Number_Search.length > 1">
+                                                    <span class="text-success" *ngIf="keyword.Number_Search[0] - keyword.Number_Search[1] > 0">
+                                                        <i class="fa fa-long-arrow-up"></i>
+                                                        {{keyword.Number_Search[0]- keyword.Number_Search[1]}}
+                                                    </span>
+                                                    <span class="text-danger" *ngIf="keyword.Number_Search[0] - keyword.Number_Search[1] < 0">
+                                                        <i class="fa fa-long-arrow-down"></i>
+                                                        {{keyword.Number_Search[0] - keyword.Number_Search[1]}}
+                                                    </span>
+                                                </span>
+                                            </td>
+                                            <td class="td-center">
+                                                {{keyword.Google_Position[0]}}
+                                                <span *ngIf="keyword.Google_Position.length > 1">
+                                                    <span class="text-success" *ngIf="keyword.Google_Position[1] - keyword.Google_Position[0] > 0">
+                                                        <i class="fa fa-long-arrow-up"></i>
+                                                        {{ keyword.Google_Position[1] - keyword.Google_Position[0] }}
+                                                    </span>
+                                                    <span class="text-danger" *ngIf="keyword.Google_Position[1] - keyword.Google_Position[0] < 0">
+                                                        <i class="fa fa-long-arrow-down"></i>
+                                                        {{keyword.Google_Position[1] - keyword.Google_Position[0]}}
+                                                    </span>
+                                                </span>
+                                            </td>
+                                            <td class="td-center">
+                                                {{keyword.Impression[0]}}
+                                                <span *ngIf="keyword.Impression.length > 1">
+                                                    <span class="text-success" *ngIf="keyword.Impression[0] - keyword.Impression[1] > 0">
+                                                        <i class="fa fa-long-arrow-up"></i>
+                                                        {{keyword.Impression[0]- keyword.Impression[1]}}
+                                                    </span>
+                                                    <span class="text-danger" *ngIf="keyword.Impression[0] - keyword.Impression[1] < 0">
+                                                        <i class="fa fa-long-arrow-down"></i>
+                                                        {{keyword.Impression[0] - keyword.Impression[1]}}
+                                                    </span>
+                                                </span>
+                                            </td>
+                                            <!-- <td class="td-center">{{keyword.Impression}}</td> -->
+                                            <!-- <td class="td-center">{{keyword.Clicks}}</td> -->
+                                            <td class="td-center">
+                                                {{keyword.Clicks[0]}}
+                                                <span *ngIf="keyword.Clicks.length > 1">
+                                                    <span class="text-success" *ngIf="keyword.Clicks[0] - keyword.Clicks[1] > 0">
+                                                        <i class="fa fa-long-arrow-up"></i>
+                                                        {{keyword.Clicks[0]- keyword.Clicks[1]}}
+                                                    </span>
+                                                    <span class="text-danger" *ngIf="keyword.Clicks[0] - keyword.Clicks[1] < 0">
+                                                        <i class="fa fa-long-arrow-down"></i>
+                                                        {{keyword.Clicks[0] - keyword.Clicks[1]}}
+                                                    </span>
+                                                </span>
+                                            </td>
+                                            <td class="td-actions text-left">
+                                                <a href='/keyword-statistic/{{id}}/{{keyword.Id_Keyword}}'
+                                                    mat-raised-button type="button" matTooltip="{{ 'exploreKeyword' | translate }}"
+                                                    [matTooltipPosition]="'above'"
+                                                    class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                    <i class="material-icons">visibility</i>
+                                                </a>
+                                                <button mat-raised-button type="button" matTooltip="{{ 'remove' | translate }}"
+                                                    [matTooltipPosition]="'above'"
+                                                    (click)="deleteKeyWord(keyword.Id_Keyword)"
+                                                    class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                    <i class="material-icons">close</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6">
+                                        <pagination-controls class="my-pagination" (pageChange)="p = $event">
+                                        </pagination-controls>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row justify-content-end">
+                                    <div class="col-md-3">
+                                        <button data-toggle="modal" data-target="#newKeyWordModal" mat-raised-button
+                                            class="btn btn-primary btn-block">{{ 'addKeyword' | translate }}
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <!-- <input type="file" mat-raised-button class="btn btn-success  btn-block"> -->
+                                        <button data-toggle="modal" data-target="#uploadKeyWordModal" mat-raised-button
+                                            class="btn btn-success  btn-block">
+                                            {{ 'uploadKeywords' | translate }}
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal new task-->
+<div class="modal  fade" id="newTaskModal" tabindex="-1" role="dialog" aria-labelledby="newTaskModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sx" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center">{{ 'newTask' | translate }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="{{ 'nameTask' | translate }}" [(ngModel)]='newTask.Name_Task' required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-12">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="{{ 'deadlineDate' | translate }}" type='date' [(ngModel)]='newTask.End'>
+                        </mat-form-field>
+                    </div>
+                    <mat-form-field class="col-md-8">
+                        <input matInput placeholder="{{ 'typeTask' | translate }}" [(ngModel)]='newTask.Type_Task' required>
+                    </mat-form-field>
+                    <div class="input-group-append col-md-4">
+                        <button *ngIf="typeTask.length > 0" class="btn btn-primary" type="button" data-toggle="dropdown"
+                            aria-haspopup="true">{{ 'typeExist' | translate }}</button>
+                        <button *ngIf="typeTask.length == 0 || !typeTask" class="btn btn-primary" type="button" data-toggle="dropdown"
+                            aria-haspopup="true" disabled>{{ 'typeExist' | translate }}</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" *ngFor="let type of typeTask"
+                                (click)=setTypeValue(type)>{{ type }}</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'close' | translate }}</button>
+                <button type="button" class="btn btn-primary" *ngIf='!objectIsEmpty()' disabled>{{ 'save' | translate }}</button>
+                <button type="button" class="btn btn-primary" *ngIf='objectIsEmpty()'
+                    (click)='createNewTask()'>{{ 'save' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal upload keyword-->
+<div class="modal  fade" id="uploadKeyWordModal" tabindex="-1" role="dialog" aria-labelledby="uploadKeyWordModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sx" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center">{{ 'uploadKeywordModal' | translate }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="file" id="fileItem" (change)="handleFileInput($event)" mat-raised-button
+                            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                            class="btn btn-primary btn-block" />
+                        <!-- <div class="parent-div">
+                          (change)="handleFileInput($event.target.files)"
+                        <button class="btn-upload">Choisir le fichier</button>
+                        <input type="file" name="upfile" />
+                      </div> -->
+                    </div>
+                </div>
+                <div class="row justify-content-left" *ngIf="messageProgress == 'progress'">
+                    <div class="col-md-2">
+                        <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">{{ 'loading' | translate }}...</span>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        {{ 'loadingWait' | translate }}.....
+                    </div>
+                </div>
+                <div class="row justify-content-left">
+                    <div class="col-md-12" *ngIf="messageProgress == 'err' ">
+                        <p>
+                            {{ 'somethingWrong' | translate }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'close' | translate }}</button>
+                <button type="button" class="btn btn-primary" *ngIf='!fileIsEmpty()' disabled>{{ 'save' | translate }}</button>
+                <button type="button" class="btn btn-primary" *ngIf='fileIsEmpty()'
+                    (click)='uploadKeyWord()'>{{ 'save' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal new keyword manually-->
+<div class="modal  fade" id="newKeyWordModal" tabindex="-1" role="dialog" aria-labelledby="newKeyWordModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sx" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center">{{ 'newKeywordModal' | translate }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="{{ 'nameKeyword' | translate }}" [(ngModel)]='newKeyWord.Name_keyword' type="text"
+                                required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field>
+                            <input matInput placeholder="{{ 'numberSearch' | translate }}" [(ngModel)]='newKeyWord.Number_Search'
+                                type="number" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field>
+                            <input matInput placeholder="Google Position" [(ngModel)]='newKeyWord.Google_Position'
+                                type="number" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field>
+                            <input matInput placeholder="Impression" [(ngModel)]='newKeyWord.Impression' type="number"
+                                required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field>
+                            <input matInput placeholder="Clicks" [(ngModel)]='newKeyWord.Clicks' type="number" required>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'close' | translate }}</button>
+                <button type="button" class="btn btn-primary" *ngIf='!keywordempty()' disabled>{{ 'save' | translate }}</button>
+                <button type="button" class="btn btn-primary" *ngIf='keywordempty()'
+                    (click)='addKeyWordManually()'>{{ 'save' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>

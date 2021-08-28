@@ -1,0 +1,28 @@
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #ffffff;
+    background-color: #952DAF;
+}
+.green-compare{
+    background-color: #83b71ca8
+}
+.red-compare{
+    background-color: #ff3b419d
+}
+#cssTable td 
+{
+    text-align: center; 
+    vertical-align: middle;
+}
+#cssTable th 
+{
+    text-align: center; 
+    vertical-align: middle;
+}
+/* .table-responsive {
+    width: 100% !important;
+    margin-bottom: 15px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    -webkit-overflow-scrolling: touch;
+} */

@@ -1,0 +1,12 @@
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #ffffff;
+    background-color: #952DAF;
+}
+::ng-deep.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: #952DAF !important;;
+}
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: #952DAF !important;
+}

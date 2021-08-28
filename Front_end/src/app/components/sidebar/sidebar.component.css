@@ -1,0 +1,15 @@
+#outer-container {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.inner-element {
+  width: 100%;
+}
+
+.spinner-border {
+  width: 1rem;
+  height: 1rem;
+}

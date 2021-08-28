@@ -1,0 +1,108 @@
+<div class="logo">
+    <a href="#" class="simple-text">
+        {{'appTitle' | translate}}
+    </a>
+</div>
+<div class="sidebar-wrapper">
+    <div *ngIf="isMobileMenu()">
+        <!-- <form class="navbar-form">
+      <span class="bmd-form-group">
+        <div class="input-group no-border">
+          <input type="text" value="" class="form-control" placeholder="Search...">
+          <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
+            <i class="material-icons">search</i>
+            <div class="ripple-container"></div>
+          </button>
+        </div>
+      </span>
+    </form> -->
+        <ul class="nav navbar-nav nav-mobile-menu">
+            <!-- <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)">
+                <i class="material-icons">dashboard</i>
+                <p>
+                    <span class="d-lg-none d-md-block">Stats</span>
+                </p>
+            </a>
+        </li> -->
+            <!-- <li class="nav-item dropdown">
+            <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="material-icons">notifications</i>
+                <span class="notification">5</span>
+                <p>
+                    <span class="d-lg-none d-md-block">Some Actions</span>
+                </p>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">Mike John responded to your email</a>
+                <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+                <a class="dropdown-item" href="#">Another Notification</a>
+                <a class="dropdown-item" href="#">Another One</a>
+            </div>
+        </li> -->
+            <!-- <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)">
+                <i class="material-icons">person</i>
+                <p>
+                    <span class="d-lg-none d-md-block">Account</span>
+                </p>
+            </a>
+        </li> -->
+            <!-- <div class="col-md-12">
+            <button mat-raised-button class="btn btn-success  btn-block" >{{ 'addNewClient' | translate }}</button>
+        </div> -->
+        </ul>
+    </div>
+    <div class="col-md-12">
+        <button mat-raised-button class="btn btn-success  btn-block"data-toggle="modal" data-target="#modalnewUser">{{ 'addNewClient' | translate }}</button>
+    </div>
+    <div class="col-md-12">
+        <button mat-raised-button class="btn btn-primary  btn-block" (click)="downloadSqlFile()">{{ 'uploadSQL' | translate }} 
+          <div class="spinner-border text-light" role="status" *ngIf="messageSql">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </button>
+    </div>
+    <ul class="nav" *ngIf='Users !== undefined'>
+        <li routerLinkActive="active" *ngFor="let user of Users" class="nav-item">
+            <a data-toggle="collapse" class="nav-link" href="#{{user.Full_Name}}" aria-expanded="true" class="nav-link">
+                <i class="material-icons">apps</i>
+                <p>{{user.Full_Name}}<b class="caret"></b></p>
+            </a>
+            <div class="collapse" id="{{user.Full_Name}}">
+                <ul class="nav">
+                    <li routerlinkactive="active" class="nav-item">
+                        <!-- <a class="nav-link" [routerLink]="['/dashboard',user.id]"> -->
+                            <a class="nav-link" href='/dashboard/{{user.id}}'>
+                            <span class="sidebar-mini">D</span>
+                            <span class="sidebar-normal">Dashboard</span>
+                        </a>
+                    </li>
+                    <li routerlinkactive="active" class="nav-item">
+                        <a class="nav-link" href='/concurrence/{{user.id}}'>
+                            <span class="sidebar-mini">Cn</span>
+                            <span class="sidebar-normal">Conncurence</span>
+                        </a>
+                    </li>  <li routerlinkactive="active" class="nav-item">
+                        <a class="nav-link" href='/user-profile/{{user.id}}'>
+                            <span class="sidebar-mini">P</span>
+                            <span class="sidebar-normal">Profil</span>
+                        </a>
+                    </li>
+                 
+                </ul>
+              </div>
+        </li>
+        <!-- <li routerLinkActive="active" *ngFor="let users of userss" class="{{users.class}} nav-item">
+            <a class="nav-link" [routerLink]="[users.path]">
+                <i class="material-icons">{{users.icon}}</i> 
+                <p class="text-center">{{users.title}}</p>
+            </a>
+        </li> -->
+
+    </ul>
+
+    
+</div>
+

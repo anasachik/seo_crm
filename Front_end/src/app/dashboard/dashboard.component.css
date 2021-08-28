@@ -1,0 +1,71 @@
+.form-control, .is-focused .form-control {
+    background-image: linear-gradient(to top, #ffff 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(255, 255, 255, 0) 1px);
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #fff;
+    opacity: 1; /* Firefox */
+}
+.top-nav{
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(209, 197, 211, 0.4);
+    border-radius: 5px;
+}
+a {
+    color: black;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #ffffff;
+    background-color: #952DAF;
+}
+.metric{
+    background-color: #f3b8b3;
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(209, 197, 211, 0.4);
+    border-radius: 5px;
+}
+/* tr{
+    border-bottom: 1px;
+    border-color: beige;
+} */
+.input-date{
+    padding-bottom: 1.25em;
+    font-size: inherit;
+    font-weight: 400;
+    line-height: 1.125;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    border-bottom-width: 1px;
+    border-color: #949494;
+}
+.ngx-pagination .current {
+    padding: 0.1875rem 0.625rem;
+    /* background: #952DAF !important; */
+    color: #fefefe;
+    cursor: default;
+}
+
+.my-pagination /deep/ .ngx-pagination .current {
+    padding: 0.2rem 0.7rem;
+    background: #952DAF ;
+}
+
+.td-center{
+    text-align: center; 
+    vertical-align: middle;
+}
+
+.fa{
+    font-weight: 800;
+    font-size: 16px;
+}
+.card-stats .card-header .card-category:not([class*=text-]) {
+    color: #999999;
+    font-size: 12px;
+}
+.card {
+    font-size: 0.78rem;
+}
+.card .card-category {
+    margin-top: auto;
+    margin-bottom: auto;
+}

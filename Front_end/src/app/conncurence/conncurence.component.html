@@ -1,0 +1,458 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-end">
+            <div class="col-md-3">
+                <button mat-raised-button class="btn btn-success  btn-block"data-toggle="modal" data-target="#newConcurrence">{{ 'addNewCompetitor' | translate }}</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">{{ 'comparativeTable' | translate }}</h4>
+                        <p class="card-category">{{ 'desComparativeTable' | translate }}</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="cssTable" *ngIf="allUserInfoModule.user != null">
+                                <thead class=" text-primary">
+                                    <th>
+                                        &nbsp;
+                                    </th>
+                                    <th>
+                                        {{allUserInfoModule.user.Company_Url}}
+                                    </th>
+                                    <th *ngFor="let con of allConcurrences" >
+                                        {{con.Company_Url}}
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{ 'framework' | translate }}
+                                        </td>
+                                        <td>
+                                            {{allUserInfoModule.infoUser[0].Framework}}
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            {{con.Framework}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ 'domainAge' | translate }}
+                                        </td>
+                                        <td>
+                                            {{allUserInfoModule.infoUser[0].Domain_Age}}
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            {{con.Domain_Age}} 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ 'servers' | translate }}
+                                        </td>
+                                        <td>
+                                            {{allUserInfoModule.infoUser[0].Servers}}
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            {{con.Servers}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            CDN
+                                        </td>
+                                        <td>
+                                            {{allUserInfoModule.infoUser[0].CDN}}
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            {{con.CDN}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ 'hierarchy' | translate }}
+                                        </td>
+                                        <td>
+                                            {{allUserInfoModule.infoUser[0].Hierarchy}}
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            {{con.Hierarchy}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ 'clickDepth' | translate }}
+                                        </td>
+                                        <td class="{{compareValue(allUserInfoModule.infoUser[0].Click_Depth, 'Click_Depth')}}">
+                                            {{allUserInfoModule.infoUser[0].Click_Depth}}
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            {{con.Click_Depth}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Internal Links
+                                        </td>
+                                        <td class="{{compareValue(allUserInfoModule.infoUser[0].Internal_Link, 'Internal_Link')}}">
+                                            {{allUserInfoModule.infoUser[0].Internal_Link}}
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            {{con.Internal_Link}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ 'pagesIndexed' | translate }}
+                                        </td>
+                                        <td class="{{compareValue(allUserInfoModule.infoUser[0].Number_Page, 'Number_Page')}}">
+                                            {{allUserInfoModule.infoUser[0].Number_Page}}
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            {{con.Number_Page}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ 'pageLoadSpeed' | translate }}
+                                        </td>
+                                        <td class="{{compareValue(allUserInfoModule.infoUser[0].Page_Load_Speed, 'Page_Load_Speed')}}">
+                                            {{allUserInfoModule.infoUser[0].Page_Load_Speed}}
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            {{con.Page_Load_Speed}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ 'avgHtags' | translate }}s
+                                        </td>
+                                        <td class="{{compareValue(allUserInfoModule.infoUser[0].Avg_HTag, 'Avg_HTag')}}">
+                                            {{allUserInfoModule.infoUser[0].Avg_HTag}}
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            {{con.Avg_HTag}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ 'domainAuthority' | translate }}
+                                        </td>
+                                        <td class="{{compareValue(allUserInfoModule.infoUser[0].Domain_Authority, 'Domain_Authority')}}">
+                                            {{allUserInfoModule.infoUser[0].Domain_Authority}}
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            {{con.Domain_Authority}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ 'avgInternalLink' | translate }}
+                                        </td>
+                                        <td class="{{compareValue(allUserInfoModule.infoUser[0].Avg_Internal_Link, 'Avg_Internal_Link')}}">
+                                            {{allUserInfoModule.infoUser[0].Avg_Internal_Link}}
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            {{con.Avg_Internal_Link}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ 'avgExternalLink' | translate }}s
+                                        </td>
+                                        <td class="{{compareValue(allUserInfoModule.infoUser[0].Avg_External_Link, 'Avg_External_Link')}}">
+                                            {{allUserInfoModule.infoUser[0].Avg_External_Link}}
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            {{con.Avg_External_Link}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ 'numberReferringDomains' | translate }}
+                                        </td>
+                                        <td class="{{compareValue(allUserInfoModule.infoUser[0].Number_Referring_Domains, 'Number_Referring_Domains')}}">
+                                            {{allUserInfoModule.infoUser[0].Number_Referring_Domains}}
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            {{con.Number_Referring_Domains}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ 'numberIPs' | translate }}
+                                        </td>
+                                        <td class="{{compareValue(allUserInfoModule.infoUser[0].Number_Ip, 'Number_Ip')}}">
+                                            {{allUserInfoModule.infoUser[0].Number_Ip}}
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            {{con.Number_Ip}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ 'numberBacklinks' | translate }}
+                                        </td>
+                                        <td class="{{compareValue(allUserInfoModule.infoUser[0].Number_Backlinks, 'Number_Backlinks')}}">
+                                            {{allUserInfoModule.infoUser[0].Number_Backlinks}}
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            {{con.Number_Backlinks}}
+                                        </td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td>
+                                            Citations
+                                        </td>
+                                    </tr> -->
+                                    <tr>
+                                        <td>
+                                            {{ 'publishingRate' | translate }}
+                                        </td>
+                                        <td class="{{compareValue(allUserInfoModule.infoUser[0].Publishing_Rate, 'Publishing_Rate')}}">
+                                            {{allUserInfoModule.infoUser[0].Publishing_Rate}}
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            {{con.Publishing_Rate}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+                                        </td>
+                                        <td>
+                                            &nbsp;
+                                        </td>
+                                        <td *ngFor="let con of allConcurrences" >
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-12">
+                                                    <button mat-raised-button class="btn btn-danger  btn-block"data-toggle="modal" data-target="#deleteModal" (click)="setIdCompetitor(con.Id_Competitor)" >{{ 'deleteCompetitor' | translate }}</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal newConcurrence-->
+<div class="modal  fade" id="newConcurrence" tabindex="-1" role="dialog" aria-labelledby="newConcurrence" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" >{{ 'addNewConcurrence' | translate }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center ">
+                    <ul class="nav nav-pills mb-3 top-nav" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="infoConcurrence-tab" data-toggle="pill" href="#infoConcurrence" role="tab"
+                                aria-controls="infoConcurrence" aria-selected="true">{{ 'userInformation' | translate }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="importantElementConcurence-tab" data-toggle="pill" href="#importantElementConcurence"
+                                role="tab" aria-controls="importantElementConcurence" aria-selected="false">{{ 'importantElements' | translate }}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content" id="myTabContent">
+                    <!-- Info User Part-->
+                    <div class="tab-pane fade show active" id="infoConcurrence" role="tabpanel"
+                        aria-labelledby="info-user-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'companyName' | translate }}" [(ngModel)]="newConcurrence.Company_Name"
+                                        required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'companyUrl' | translate }}" [(ngModel)]="newConcurrence.Company_Url" required>
+                                    <!-- <input matInput placeholder="Company (disabled)" disabled> -->
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <!-- important Element -->
+                    <div class="tab-pane fade" id="importantElementConcurence" role="tabpanel"
+                        aria-labelledby="important-element-tab">
+                        <div class="row">
+                            <!-- row 1 -->
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'framework' | translate }}" [(ngModel)]="newImportantInformation.Framework"
+                                        required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'domainAge' | translate }}" [(ngModel)]="newImportantInformation.Domain_Age"
+                                        required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'hierarchy' | translate }}" [(ngModel)]="newImportantInformation.Hierarchy"
+                                        required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'servers' | translate }}" [(ngModel)]="newImportantInformation.Servers" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'CDN' | translate }}" [(ngModel)]="newImportantInformation.CDN" required>
+                                </mat-form-field>
+                            </div>
+                            
+                            <!-- row 2-->
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'clickDepth' | translate }}" type="number"
+                                        [(ngModel)]="newImportantInformation.Click_Depth" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'internalLink' | translate }} " type="number"
+                                        [(ngModel)]="newImportantInformation.Internal_Link" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'numberPageIndexed' | translate }}" type="number"
+                                        [(ngModel)]="newImportantInformation.Number_Page" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'pageLoadSpeed' | translate }}" type="number"
+                                        [(ngModel)]="newImportantInformation.Page_Load_Speed" required>
+                                </mat-form-field>
+                            </div>
+                            <!-- row 3-->
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'avgWordPerPage' | translate }}" type="number"
+                                        [(ngModel)]="newImportantInformation.Avg_Word_Per_Page" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'avgInternalLink' | translate }}" type="number"
+                                        [(ngModel)]="newImportantInformation.Avg_Internal_Link" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'avgHTag' | translate }}" type="number"
+                                        [(ngModel)]="newImportantInformation.Avg_HTag" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'domainAuthority' | translate }}" type="number"
+                                        [(ngModel)]="newImportantInformation.Domain_Authority" required>
+                                </mat-form-field>
+                            </div>
+                            <!-- row 4-->
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'avgExternalLink' | translate }}" type="number"
+                                        [(ngModel)]="newImportantInformation.Avg_External_Link" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'numberReferringDomains' | translate }}" type="number"
+                                        [(ngModel)]="newImportantInformation.Number_Referring_Domains" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'numberIPs' | translate }}" type="number"
+                                        [(ngModel)]="newImportantInformation.Number_Ip" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'numberBacklinks' | translate }}" type="number"
+                                        [(ngModel)]="newImportantInformation.Number_Backlinks" required>
+                                </mat-form-field>
+                            </div>
+                            <!-- row 5-->
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'publishingRate' | translate }}" type="number"
+                                        [(ngModel)]="newImportantInformation.Publishing_Rate" required>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-left" *ngIf="messageProgress == 'progress'">
+                    <div class="col-md-2">
+                        <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">{{ 'loading' | translate }}...</span>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        {{ 'loadingWait' | translate }}.....
+                    </div>
+                </div>
+                <div class="row justify-content-left">
+                    <div class="col-md-12" *ngIf="messageProgress == 'err' ">
+                        <p>
+                            {{ 'somethingWrong' | translate }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'close' | translate }}</button>
+                <button type="button" class="btn btn-primary"  *ngIf='!objectIsEmpty()' disabled>{{ 'saveChanges' | translate }}</button>
+                <button type="button" class="btn btn-primary"  *ngIf='objectIsEmpty()' (click)='createNewConcurrence()'>Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal confirm delete-->
+<div class="modal  fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+    <div class="modal-dialog modal-sx" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" >{{ 'deleteCompetitor' | translate }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>{{ 'messageConfirmDelete' | translate }}</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'close' | translate }}</button>
+                <button type="button" class="btn btn-danger"  *ngIf='!idConToDelete' disabled>{{ 'confirmDelete' | translate }}</button>
+                <button type="button" class="btn btn-danger"  *ngIf='idConToDelete' (click)='deleteCompetitor()'>{{ 'confirmDelete' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>

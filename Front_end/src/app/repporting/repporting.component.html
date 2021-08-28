@@ -1,0 +1,155 @@
+<div class="main-content">
+
+    <div class="row justify-content-end">
+        <div class="col-md-2">
+            <button mat-raised-button (click)='captureScreen()' class="btn btn-primary btn-block">
+                {{ 'exportRapport' | translate }}
+            </button>
+        </div>
+    </div>
+    <div id='contentPdf'>
+        <h1 class="text-center">{{ 'rapportSeoCRM' | translate }}</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title text-center">{{ 'userProfile' | translate }}</h4>
+                    </div>
+                    <div class="card-body" *ngIf="allUserInfoModule != null">
+                        <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="info-user-tab"
+                            *ngIf="allUserInfoModule.user != null">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="text-primary text-center">{{ 'fullName' | translate }} : <span
+                                            class="text-black">{{allUserInfoModule.user.Full_Name}}</span></p>
+                                </div>
+                                <div class="col-md-12">
+                                    <p class="text-primary text-center">{{ 'companyUrl' | translate }} : <span
+                                            class="text-black">{{allUserInfoModule.user.Company_Url}}</span></p>
+                                </div>
+                                <div class="col-md-12">
+                                    <p class="text-primary text-center">{{ 'companyName' | translate }} : <span
+                                            class="text-black">{{allUserInfoModule.user.Company_Name}}</span></p>
+                                </div>
+                                <div class="col-md-12">
+                                    <p class="text-primary text-center">{{ 'phone' | translate }} : <span
+                                            class="text-black">{{allUserInfoModule.user.Phone}}</span></p>
+                                </div>
+                                <div class="col-md-12">
+                                    <p class="text-primary text-center">{{ 'email' | translate }}: <span
+                                            class="text-black">{{allUserInfoModule.user.Email}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title text-center">{{ 'websiteProgress' | translate }}</h4>
+                    </div>
+                    <div class="card-body" *ngIf="allUserInfoModule != null">
+                        <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="info-user-tab"
+                            *ngIf="allUserInfoModule.user != null">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="text-primary text-center">{{ 'keywords' | translate }} : <span class="text-black">{{TopKeyWord}} /
+                                            {{allKeyWords.length }}</span></p>
+                                </div>
+                                <div class="col-md-12">
+                                    <p class="text-primary text-center">{{ 'domainAuthority' | translate }} : <span
+                                            class="text-black">{{allUserInfoModule.infoUser[0].Domain_Authority}}</span>
+                                    </p>
+                                </div>
+                                <div class="col-md-12">
+                                    <p class="text-primary text-center">{{ 'pageLoadSpeed' | translate }} : <span
+                                            class="text-black">{{allUserInfoModule.infoUser[0].Page_Load_Speed}}
+                                            s</span></p>
+                                </div>
+                                <div class="col-md-12">
+                                    <p class="text-primary text-center">{{ 'numberOfBacklinks' | translate }} : <span
+                                            class="text-black">{{allUserInfoModule.infoUser[0].Number_Backlinks}}</span>
+                                    </p>
+                                </div>
+                                <div class="col-md-12">
+                                    <p class="text-primary text-center ">Date : <span
+                                            class="text-black">{{formatDateTime(allUserInfoModule.infoUser[0].Date_Update)}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-hover" id="tablePdf">
+                <thead class="text-primary">
+                    <th>{{ 'keywords' | translate }}</th>
+                    <th class="td-center">{{ 'searchNumber' | translate }} </th>
+                    <th class="td-center">{{ 'googlePos' | translate }}</th>
+                    <th class="td-center">{{ 'impression' | translate }}</th>
+                    <th class="td-center">{{ 'clicks' | translate }}</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let keyword of allKeyWords ">
+                        <td>{{keyword.Name_keyword}}</td>
+                        <td class="td-center">
+                            {{keyword.Number_Search[0]}}
+                            <span *ngIf="keyword.Number_Search.length > 1">
+                                <span class="text-success"
+                                    *ngIf="keyword.Number_Search[0] - keyword.Number_Search[1] > 0">
+                                    + {{keyword.Number_Search[0]- keyword.Number_Search[1]}}
+                                </span>
+                                <span class="text-danger"
+                                    *ngIf="keyword.Number_Search[0] - keyword.Number_Search[1] < 0">
+                                    {{keyword.Number_Search[0] - keyword.Number_Search[1]}}
+                                </span>
+                            </span>
+                        </td>
+                        <td class="td-center">
+                            {{keyword.Google_Position[0]}}
+                            <span *ngIf="keyword.Google_Position.length > 1">
+                                <span class="text-success"
+                                    *ngIf="keyword.Google_Position[1] - keyword.Google_Position[0] > 0">
+                                    + {{ keyword.Google_Position[1] - keyword.Google_Position[0] }}
+                                </span>
+                                <span class="text-danger"
+                                    *ngIf="keyword.Google_Position[1] - keyword.Google_Position[0] < 0">
+                                    {{keyword.Google_Position[1] - keyword.Google_Position[0]}}
+                                </span>
+                            </span>
+                        </td>
+                        <td class="td-center">
+                            {{keyword.Impression[0]}}
+                            <span *ngIf="keyword.Impression.length > 1">
+                                <span class="text-success" *ngIf="keyword.Impression[0] - keyword.Impression[1] > 0">
+                                    + {{keyword.Impression[0]- keyword.Impression[1]}}
+                                </span>
+                                <span class="text-danger" *ngIf="keyword.Impression[0] - keyword.Impression[1] < 0">
+                                    {{keyword.Impression[0] - keyword.Impression[1]}}
+                                </span>
+                            </span>
+                        </td>
+                        <td class="td-center">
+                            {{keyword.Clicks[0]}}
+                            <span *ngIf="keyword.Clicks.length > 1">
+                                <span class="text-success" *ngIf="keyword.Clicks[0] - keyword.Clicks[1] > 0">
+                                    + {{keyword.Clicks[0]- keyword.Clicks[1]}}
+                                </span>
+                                <span class="text-danger" *ngIf="keyword.Clicks[0] - keyword.Clicks[1] < 0">
+                                    {{keyword.Clicks[0] - keyword.Clicks[1]}}
+                                </span>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

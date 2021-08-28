@@ -1,0 +1,392 @@
+<div class="main-content p-20">
+    <div class="row justify-content-start">
+        <div class="col-md-2">
+            <!-- <button mat-raised-button (click)='onClickBack()' class="btn btn-primary  btn-block">
+                <i class="fa fa-long-arrow-left"></i>
+                   {{ 'goBack' | translate }}
+            </button> -->
+            <a class="btn btn-primary  btn-block" href="dashboard/{{id}}">
+                <i class="fa fa-long-arrow-left"></i>
+                {{ 'goBack' | translate }}
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-chart">
+                <div class="card-header card-header-success">
+                    <div class="ct-chart" id="statusWebSite" style="height:255px"></div>
+                </div>
+                <div class="card-body" *ngIf="allinfoKeyWord">
+                    <h4 class="card-title" *ngIf='allinfoKeyWord[0]'>{{ 'keywordName' | translate }} {{allinfoKeyWord[0].Name_keyword}}
+                    </h4>
+                    <p class="card-category">
+                    <div class="stats" *ngIf="allinfoKeyWord.length > 1">
+                        <p class="card-category"
+                            *ngIf='(allinfoKeyWord[0].Number_Search - allinfoKeyWord[1].Number_Search) > 0'>
+                            <span class="text-success">
+                                <i class="fa fa-long-arrow-up"></i>
+                                {{allinfoKeyWord[0].Number_Search - allinfoKeyWord[1].Number_Search}}
+                            </span>
+                            {{ 'nbSearchIncreased' | translate }}
+                        </p>
+                        <p class="card-category"
+                            *ngIf='(allinfoKeyWord[0].Number_Search - allinfoKeyWord[1].Number_Search) == 0'>
+                            No Change From Last Values
+                        </p>
+                        <p class="card-category"
+                            *ngIf='(allinfoKeyWord[0].Number_Search - allinfoKeyWord[1].Number_Search) < 0'>
+                            <span class="text-danger">
+                                <i class="fa fa-long-arrow-down"></i>
+                                {{allinfoKeyWord[0].Number_Search - allinfoKeyWord[1].Number_Search}}
+                            </span>
+                            {{ 'nbSearchDecreased' | translate }}
+                        </p>
+                    </div>
+                    <div class="stats" *ngIf="allinfoKeyWord.length == 0">
+                        <p class="card-category" *ngIf='allinfoKeyWord[0]'>
+                            {{ 'numberOfSearch' | translate }} {{ allinfoKeyWord[0].Number_Search }}
+                        </p>
+                    </div>
+                </div>
+                <div class="card-footer" *ngIf="allinfoKeyWord">
+                    <div class="stats" *ngIf="allinfoKeyWord[0]">
+                        <i class="material-icons">access_time</i>
+                        {{ 'lastUpdate' | translate }} {{ formatDateTime(allinfoKeyWord[0].Date_Update) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-tabs card-header-primary">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <span class="nav-tabs-title">{{ 'keywordBacklink' | translate }}</span>
+                            <ul class="nav nav-tabs" data-tabs="tabs">
+                                <li class="nav-item" *ngFor="let tracat of traitementCat">
+                                    <a mat-button class="nav-link" href="#{{removeSpace(tracat)}}" data-toggle="tab">
+                                        {{tracat}}
+                                        <div class="ripple-container"></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane" *ngFor="let tracat of traitementCat" id="{{removeSpace(tracat)}}">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        {{ 'name' | translate }}
+                                    </th>
+                                    <th>
+                                        {{ 'traitementUrl' | translate }}
+                                    </th>
+                                    <th>
+                                        {{ 'deadlineDate' | translate }}
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let Traitement of filterItemsOfTypetraitement(tracat) | paginate: { itemsPerPage: 5, currentPage: p }">
+                                        <td>{{Traitement.Name_BackLink}}</td>
+                                        <td>
+                                            <a href="{{Traitement.Url_BackLink}}"
+                                                target="_blank">{{Traitement.Url_BackLink}}</a>
+                                        </td>
+                                        <td>{{formatDateTime(Traitement.Date_Traitement)}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <pagination-controls class="my-pagination" (pageChange)="p = $event">
+                                    </pagination-controls>
+                                </div>
+                                </div>
+                        </div>
+
+                        <div class="row justify-content-end">
+                            <div class="col-md-4">
+                                <button mat-raised-button class="btn btn-success  btn-block" data-toggle="modal"
+                                    data-target="#backlinkModal">{{ 'addNewTraitement' | translate }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header card-header-tabs card-header-primary">
+                    <p> {{ 'updateKeywordInformation' | translate }} </p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field>
+                                <input matInput placeholder="{{ 'numberSearch' | translate }}" [(ngModel)]='updateKeyWord.Number_Search'
+                                    type="number" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field>
+                                <input matInput placeholder="Google Position"
+                                    [(ngModel)]='updateKeyWord.Google_Position' type="number" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field>
+                                <input matInput placeholder="Impression" [(ngModel)]='updateKeyWord.Impression'
+                                    type="number" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field>
+                                <input matInput placeholder="Clicks" [(ngModel)]='updateKeyWord.Clicks' type="number"
+                                    required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-10">
+                            <button mat-raised-button class="btn btn-success  btn-block" *ngIf="checkIfChange()"
+                                disabled>{{ 'save' | translate }}</button>
+                            <button mat-raised-button class="btn btn-success  btn-block" *ngIf="!checkIfChange()"
+                                (click)="updateKeyword()">{{ 'save' | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-tabs card-header-primary">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <span class="nav-tabs-title">{{ 'keywordTask' | translate }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <th>
+                                &nbsp;
+                            </th>
+                            <th>
+                                {{ 'description' | translate }}
+                            </th>
+                            <th>
+                                {{ 'startDate' | translate }}
+                            </th>
+                            <th>
+                                {{ 'deadlineDate' | translate }}
+                            </th>
+                            <th style="text-align: end; 
+                            vertical-align: middle;">
+                                {{ 'action' | translate }}
+                            </th>
+                        </thead>
+                        <tbody *ngIf="allKeyWordTask">
+                            <tr *ngFor="let keyTask of allKeyWordTask">
+                                <td>
+                                    <div class="form-check">
+                                        <label class="form-check-label" *ngIf='keyTask.Checked'>
+                                            <input class="form-check-input" type="checkbox"
+                                                (click)="updateTaskKeyWord(keyTask)" value="" checked>
+                                            <span class="form-check-sign">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                        <label class="form-check-label" *ngIf='!keyTask.Checked'>
+                                            <input class="form-check-input" type="checkbox"
+                                                (click)="updateTaskKeyWord(keyTask)" value="">
+                                            <span class="form-check-sign">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    {{keyTask.Name_Task}}
+                                </td>
+                                <td>
+                                    {{formatDate(keyTask.Start)}}
+                                </td>
+                                <td>
+                                    {{formatDate(keyTask.End)}}
+                                </td>
+                                <td class="td-actions text-right">
+                                    <button mat-raised-button type="button" matTooltip="{{ 'remove' | translate }}"
+                                        [matTooltipPosition]="'above'"
+                                        (click)="deleteKeywordTask(keyTask.Id_KewordTask)"
+                                        class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="row justify-content-end">
+                        <div class="col-md-4">
+                            <button mat-raised-button data-toggle="modal" data-target="#newKeyWordTaskModal"
+                                class="btn btn-success btn-block">{{ 'addKeywordTask' | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+<!-- Modal new task-->
+<div class="modal  fade" id="newKeyWordTaskModal" tabindex="-1" role="dialog" aria-labelledby="newKeyWordTaskModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sx" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center">{{ 'newKeyWordTaskModal' | translate }} </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="{{ 'nameTask' | translate }}" [(ngModel)]='newKeyWordTask.Name_Task' required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-12">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="{{ 'deadlineDate' | translate }}" type='date' [(ngModel)]='newKeyWordTask.End'>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'close' | translate }}</button>
+                <button type="button" class="btn btn-primary" *ngIf='!keywordTaskempty()' disabled>{{ 'save' | translate }}</button>
+                <button type="button" class="btn btn-primary" *ngIf='keywordTaskempty()'
+                    (click)="addKeywordTask()">{{ 'save' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal backlink -->
+<div class="modal fade" id="backlinkModal" tabindex="-1" role="dialog" aria-labelledby="backlinkModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sx" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center">{{ 'backlinkModal' | translate }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center ">
+                    <ul class="nav nav-pills mb-3 top-nav" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link " id="newBacklink-tab" data-toggle="pill" href="#newBacklink" role="tab"
+                                aria-controls="newBacklink" aria-selected="true">{{ 'newBacklink' | translate }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" id="existingBacklink-tab" data-toggle="pill"
+                                href="#existingBacklink" role="tab" aria-controls="existingBacklink"
+                                aria-selected="false">{{ 'existingBacklink' | translate }} </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content" id="pills-tabContent">
+
+                    <div class="tab-pane fade " id="newBacklink" role="tabpanel">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="{{ 'backlinkName' | translate }}"
+                                        [(ngModel)]="newTraitement.Name_BackLink" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="{{ 'urlBacklink' | translate }}"
+                                        [(ngModel)]="newTraitement.Url_BackLink" required>
+                                    </mat-form-field>
+                                </div>
+
+                                <mat-form-field class="col-md-8">
+                                    <input matInput placeholder="{{ 'typeBacklink' | translate }}"
+                                    [(ngModel)]="newTraitement.Type_BackLink" required>
+                                </mat-form-field>
+                                <div class="input-group-append col-md-4">
+                                    <button *ngIf="backlinksCats.length > 0" class="btn btn-success" type="button"
+                                        data-toggle="dropdown" aria-haspopup="true">{{ 'typeExist' | translate }}</button>
+                                    <button *ngIf="backlinksCats.length < 0 " class="btn btn-success" type="button"
+                                        data-toggle="dropdown" aria-haspopup="true" disabled>{{ 'typeExist' | translate }}</button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" *ngFor="let backlinkcat of backlinksCats"
+                                            (click)='setBacklinkType(backlinkcat)'>{{ backlinkcat }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-end">
+                                <div class="col-md-4">
+                                    <button mat-raised-button 
+                                    class="btn btn-primary btn-block" *ngIf='objectIsEmpty()' (click)='createNewBacklink()'>{{ 'save' | translate }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade show active" id="existingBacklink" role="tabpanel">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 p-10">
+                                    <label> {{ 'backlinkCategories' | translate }}</label>
+                                    <select class="form-control" (change)='setBacklinkCat($event.target.value)'>
+                                        <option>{{ 'chooseCategory' | translate }}</option>
+                                        <option *ngFor="let BacklinkCat of backlinksCats">
+                                            {{BacklinkCat}}
+                                        </option>
+                                    </select>
+
+                                </div>
+                                <div class="col-md-12 p-10" *ngIf="nameBacklinkCat">
+                                    <label>{{ 'backlinkName' | translate }}</label>
+                                    <select class="form-control" (change)='setBacklinkChoosing($event.target.value)'>
+                                        <option>{{ 'chooseBacklink' | translate }}</option>
+                                        <option *ngFor="let allBacklink of filterItemsOfType(nameBacklinkCat)"
+                                            [value]='allBacklink.Id_BackLink'>{{allBacklink.Name_BackLink}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row justify-content-end">
+                                <button type="button" class="btn btn-primary" *ngIf='BacklinkId'
+                                    (click)="addTraitementKeyword()">{{ 'save' | translate }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'close' | translate }}</button>
+                <button type="button" class="btn btn-primary" *ngIf='!keywordTaskempty()' disabled>{{ 'save' | translate }}</button>
+                <button type="button" class="btn btn-primary" *ngIf='keywordTaskempty()' (click)="addKeywordTask()" >{{ 'save' | translate }}</button>
+            </div> -->
+        </div>
+    </div>
+</div>

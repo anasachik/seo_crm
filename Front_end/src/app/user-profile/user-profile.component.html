@@ -1,0 +1,177 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-8">
+              <div class="card">
+                  <div class="card-header card-header-primary">
+                      <h4 class="card-title">Edit Profile</h4>
+                      <p class="card-category">{{ 'completeProfile' | translate }}</p>
+                  </div>
+                  <div class="card-body">
+                    <div class="row" *ngIf='allUserInfoModule.infoUser'>
+                      <!-- row 1 -->
+                      <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{ 'framework' | translate }}" [(ngModel)]="allUserInfoModule.infoUser[0].Framework"
+                                  required>
+                          </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{ 'domainAge' | translate }}" [(ngModel)]="allUserInfoModule.infoUser[0].Domain_Age"
+                                  required>
+                          </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="{{ 'hierarchy' | translate }}" [(ngModel)]="allUserInfoModule.infoUser[0].Hierarchy"
+                                required>
+                        </mat-form-field>
+                    </div>
+                      <div class="col-md-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="{{ 'servers' | translate }}" [(ngModel)]="allUserInfoModule.infoUser[0].Servers"
+                                required>
+                        </mat-form-field>
+                    </div>
+                      <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{ 'CDN' | translate }}" [(ngModel)]="allUserInfoModule.infoUser[0].CDN" required>
+                          </mat-form-field>
+                      </div>
+                      
+                      <!-- row 2-->
+                      <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{ 'clickDepth' | translate }}" type="number"
+                                  [(ngModel)]="allUserInfoModule.infoUser[0].Click_Depth" required>
+                          </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{ 'internalLink' | translate }} " type="number"
+                                  [(ngModel)]="allUserInfoModule.infoUser[0].Internal_Link" required>
+                          </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{ 'numberPageIndexed' | translate }}" type="number"
+                                  [(ngModel)]="allUserInfoModule.infoUser[0].Number_Page" required>
+                          </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{ 'pageLoadSpeed' | translate }}" type="number"
+                                  [(ngModel)]="allUserInfoModule.infoUser[0].Page_Load_Speed" required>
+                          </mat-form-field>
+                      </div>
+                      <!-- row 3-->
+                      <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{ 'avgWordPerPage' | translate }}" type="number"
+                                  [(ngModel)]="allUserInfoModule.infoUser[0].Avg_Word_Per_Page" required>
+                          </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{ 'avgInternalLink' | translate }}" type="number"
+                                  [(ngModel)]="allUserInfoModule.infoUser[0].Avg_Internal_Link" required>
+                          </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{ 'avgHTag' | translate }}" type="number"
+                                  [(ngModel)]="allUserInfoModule.infoUser[0].Avg_HTag" required>
+                          </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{ 'domainAuthority' | translate }}" type="number"
+                                  [(ngModel)]="allUserInfoModule.infoUser[0].Domain_Authority" required>
+                          </mat-form-field>
+                      </div>
+                      <!-- row 4-->
+                      <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{ 'avgExternalLink' | translate }}" type="number"
+                                  [(ngModel)]="allUserInfoModule.infoUser[0].Avg_External_Link" required>
+                          </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{ 'numberReferringDomains' | translate }}" type="number"
+                                  [(ngModel)]="allUserInfoModule.infoUser[0].Number_Referring_Domains" required>
+                          </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{ 'numberIPs' | translate }}" type="number"
+                                  [(ngModel)]="allUserInfoModule.infoUser[0].Number_Ip" required>
+                          </mat-form-field>
+                      </div>
+                      <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{ 'numberBacklinks' | translate }}" type="number"
+                                  [(ngModel)]="allUserInfoModule.infoUser[0].Number_Backlinks" required>
+                          </mat-form-field>
+                      </div>
+                      <!-- row 5-->
+                      <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{ 'publishingRate' | translate }}" type="number"
+                                  [(ngModel)]="allUserInfoModule.infoUser[0].Publishing_Rate" required>
+                          </mat-form-field>
+                      </div>
+                  </div>
+                  <button mat-raised-button type="submit" class="btn btn-success pull-right" (click)='updateUserImportantElement()'>Update Profile</button>
+                          <div class="clearfix"></div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="card card-profile">
+                  <div class="card-body" *ngIf="allUserInfoModule != null">
+                      <div class="tab-pane fade show active" role="tabpanel"
+                        aria-labelledby="info-user-tab" *ngIf="allUserInfoModule.user != null">
+                        <div class="row" >
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'fullName' | translate }}" [(ngModel)]="allUserInfoModule.user.Full_Name" required>
+                                    <!-- <input matInput placeholder="Company (disabled)" disabled> -->
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'companyName' | translate }}" [(ngModel)]="allUserInfoModule.user.Company_Name"
+                                        required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-12">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'companyUrl' | translate }}" [(ngModel)]="allUserInfoModule.user.Company_Url"
+                                        required>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'phone' | translate }}" [(ngModel)]="allUserInfoModule.user.Phone" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{ 'phone' | translate }}" type="email" [(ngModel)]="allUserInfoModule.user.Email"
+                                        required>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                    </div>
+                      <a href="javascript:void(0)" class="btn btn-success btn-round" (click)='updateUserInfo()'>{{ 'update' | translate }}</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
